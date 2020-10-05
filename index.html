@@ -12,7 +12,19 @@
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   <script src="gesture-detector.js"></script>
-  <script src="gesture-handler.js"></script>
+  <script src="gesture-handler.js?3"></script>
+  <script>
+    var intervalID = window.setInterval(
+      function () {
+        if (window.Ajax.activeRequestCount === 0) {
+          console.log('No active ajax calls');
+          window.clearInterval(intervalID);
+        } else {
+          console.log('There are ' + window.Ajax.activeRequestCount + ' active ajax requests');
+        }
+      }, 500);
+  </script>
+  </script>
 </head>
 
 <body>
@@ -54,12 +66,12 @@
       id="markerA">
 
       <!-- <a-entity light="type: hemisphere; intensity: 0.6"></a-entity> -->
-      <a-entity position="70 100 0" light="type: directional; 
+      <a-entity position="70 100 0" light="type: directional; color: #FFF5EE;
       castShadow: true;
-      intensity: 3;
+      intensity: 4;
       shadowCameraVisible: true;"></a-entity>
-      <a-entity light="type: ambient; intensity: 2;" id="bowser-model" gltf-model="#city" position="0 0 0"
-        scale="0.001 0.001 0.001" class="clickable" gesture-handler>
+      <a-entity light="type: ambient; intensity: 1.5;" id="bowser-model" gltf-model="#city" position="0 0 0"
+        scale="0.0015 0.0015 0.0015" class="clickable" gesture-handler>
       </a-entity>
     </a-marker>
 
@@ -70,7 +82,7 @@
       intensity: 3;
       shadowCameraVisible: true;"></a-entity>
       <a-entity light="type: ambient; intensity: 0.5;" id="bowser-model" gltf-model="#2d" position="0 0 0"
-        scale="0.2 0.2 0.2" class="clickable">
+        scale="0.2 0.2 0.2" class="clickable" gesture-handler2>
       </a-entity>
     </a-marker>
     <a-entity camera></a-entity>
