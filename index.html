@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <title>Gesture Interactions - A-Frame & AR.js</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="styles.css">
 
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <script src="gesture-detector.js"></script>
-    <script src="gesture-handler.js"></script>
-  </head>
+<head>
+  <title>Gesture Interactions - A-Frame & AR.js</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="styles.css">
 
-  <body>
-    <a-scene
-      arjs
-      embedded
-      renderer="logarithmicDepthBuffer: true;"
-      vr-mode-ui="enabled: false"
-      gesture-detector
-      id="scene"
-    >
-    <!-- src="https://cdn.glitch.com/06bd98b4-97ee-4c07-a546-fe39ca205034%2Fbowser.glb" -->
-      <a-assets>
-        <a-asset-item
-          id="bowser"
-          src="resources/fighter-jet.glb"
-        >
-        </a-asset-item>
-      </a-assets>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="gesture-detector.js"></script>
+  <script src="gesture-handler.js"></script>
+</head>
 
-      <a-marker
-        preset="hiro"
-        raycaster="objects: .clickable"
-        emitevents="true"
-        cursor="fuse: false; rayOrigin: mouse;"
-        id="markerA"
-      >
-        <a-entity
-          id="bowser-model"
-          gltf-model="#bowser"
-          position="0 0 0"
-          scale="0.05 0.05 0.05"
-          class="clickable"
-          gesture-handler
-        >
-        </a-entity>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
+<body>
+  <a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector
+    id="scene">
+    <a-assets>
+      <a-asset-item id="drone" src="resources/drone/scene.gltf">
+      </a-asset-item>
+      <!-- <a-asset-item id="bowser" src="https://cdn.glitch.com/06bd98b4-97ee-4c07-a546-fe39ca205034%2Fbowser.glb">
+      </a-asset-item>
+      <a-asset-item id="girl" src="resources/elf_girl/scene.gltf">
+      </a-asset-item>
+      <a-asset-item id="castle" src="resources/minecraft_castle/scene.gltf">
+      </a-asset-item> -->
+      <a-asset-item id="city" src="resources/city/scene.gltf">
+      </a-asset-item>
+    </a-assets>
+
+    <a-marker preset="hiro" id="markerA" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <a-entity id="jet-model" gltf-model="#drone" position="-0.5 -0.5 0" scale="0.01 0.01 0.01"
+        animation-mixer="clip: *; loop: repeat" class="clickable" gesture-handler>
+      </a-entity>
+    </a-marker>
+
+    <a-marker preset="kanji" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;"
+      id="markerA">
+      <a-entity id="bowser-model" gltf-model="#city" position="0 0 0" scale="0.001 0.001 0.001" class="clickable"
+        gesture-handler>
+      </a-entity>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+
 </html>
