@@ -13,22 +13,11 @@
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   <script src="gesture-detector.js"></script>
   <script src="gesture-handler.js?3"></script>
-  <script>
-    var intervalID = window.setInterval(
-      function () {
-        if (window.Ajax.activeRequestCount === 0) {
-          console.log('No active ajax calls');
-          window.clearInterval(intervalID);
-        } else {
-          console.log('There are ' + window.Ajax.activeRequestCount + ' active ajax requests');
-        }
-      }, 500);
-  </script>
-  </script>
+
 </head>
 
 <body>
-  <a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector
+  <a-scene  loading-screen="dotsColor: red; backgroundColor: black" arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector
     id="scene">
     <a-assets>
       <!-- <a-asset-item id="drone" src="https://arresource.blob.core.windows.net/arresources/resources/drone/scene.gltf">
@@ -36,6 +25,7 @@
 
       <a-asset-item id="2d" src="resources/2d.glb">
       </a-asset-item>
+      <a-asset-item id="flyer" src="resources/butterf.glb"></a-asset-item>
 
       <a-asset-item id="city" src="https://arresource.blob.core.windows.net/arresources/resources/city/scene.gltf">
       </a-asset-item>
@@ -81,6 +71,24 @@
         scale="0.2 0.2 0.2" class="clickable" gesture-handler2>
       </a-entity>
     </a-marker>
+
+    <a-marker preset="hiro">
+      <a-entity position="100 100 0" light="type: directional; color: #750d20;intensity: 4;"></a-entity>
+      <a-entity 
+        rotation="0 90 0"
+        cursor='rayOrigin: mouse' 
+        scale="0.5 0.5 0.5" id='animated-model'
+        animation-mixer="clip: *; loop: repeat; timeScale: 1" 
+        gltf-model='#flyer'>
+      </a-entity>
+      <a-entity 
+        rotation="0 90 0"
+        cursor='rayOrigin: mouse' light="type: ambient; color: red;intensity: 1.5" scale="0.5 0.5 0.5"
+        position="1 1 1" id='animated-model' animation-mixer="clip: *; loop: repeat; timeScale: 2"
+        gltf-model='#flyer'>
+      </a-entity>
+    </a-marker>
+
     <a-entity camera></a-entity>
   </a-scene>
 </body>
